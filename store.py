@@ -10,6 +10,8 @@
 import tkinter as tk
 from tkinter import ttk
 from tkinter import messagebox
+import popups
+#import productframe
 #additional module imports
 
 #make a menubar
@@ -36,10 +38,10 @@ root.title("Font Shop")
 makeMenu(root)
 
 #add scrollable region
-myCanvas = tk.Canvas(self, scrollregion=(0,0,500,500), height=200, width=200)
-myScrollbar = Scrollbar(self, command=myCanvas.yview)
+myCanvas = tk.Canvas(root, scrollregion=(0,0,500,500), height=200, width=200)
+myScrollbar = ttk.Scrollbar(root, command=myCanvas.yview)
 myCanvas.pack(side='left')
-myScrollbar.pack(side=RIGHT, fill=Y)
+myScrollbar.pack(side='right', fill=Y)
 myCanvas.configure(yscrollincrement='2')
 
 #handle scroll inputs
@@ -105,19 +107,5 @@ class ProductFrame(tk.Frame):
         self.radioButtonTwo.pack(side = 'top')
         self.radioButtonThree.pack(side = 'right')
         self.productImage.pack(top)
-
-
-
-def invalidInputWarning():
-    rtnVal = False
-    if messagebox.askyesno(title = 'Invalid Input Warning!', message = 'Warning!  You are attempting to purchase "0" of at least one product!  Do you want to remove these items from your cart and proceed anyway?'):
-        rtnVal = True
-    return rtnVal
-
-def displayConfirmationPopup():
-    messagebox.showinfo(title = 'Order success! ', message = 'Congratulations!  Your order has been placed successfully!')
-    
-def invalidPaymentCredentialsError():
-    messagebox.showerror(title = 'Error! ', message = 'Error: Invalid payment credentials were detected.  Please try again.')
 
 
