@@ -12,7 +12,16 @@ from tkinter import ttk
 from tkinter import messagebox
 #additional module imports
 
-#detailed function description blocks for each defined function
+#make a menubar
+def makeMenu(parent):
+    menubar = tk.Frame(parent)
+    menubar.pack(side = 'top', fill = 'x')
+    btnFile = tk.Menubutton(menubar, text = 'File', underline = 0)
+    btnFile.pack(side='left')
+    btnFile = tk.Menubutton(menubar, text = 'Edit', underline = 0)
+    btnFile.pack(side='left')
+    btnFile = tk.Menubutton(menubar, text = 'Help', underline = 0)
+    btnFile.pack(side='left')
 
 #Create "top level" window
 root = tk.Tk()
@@ -21,10 +30,10 @@ root = tk.Tk()
 #myLabel = tk.Label(root, text="Hello World")
 
 #change window title
-self.winfo_toplevel().title("Font Shop")
+root.title("Font Shop")
 
 #add menubar
-makeMenu()
+makeMenu(root)
 
 #add scrollable region
 myCanvas = tk.Canvas(self, scrollregion=(0,0,500,500), height=200, width=200)
@@ -52,15 +61,6 @@ myCanvas.focus_set()
 #Start the event loop
 root.mainloop();
 
-def makeMenu(parent):
-    menubar = tk.Frame(parent)
-    menubar.pack(side = 'top', fill = 'x')
-    btnFile = tk.Menubutton(menubar, text = 'File', underline = 0)
-    btnFile.pack(side='left')
-    btnFile = tk.Menubutton(menubar, text = 'Edit', underline = 0)
-    btnFile.pack(side='left')
-    btnFile = tk.Menubutton(menubar, text = 'Help', underline = 0)
-    btnFile.pack(side='left')
 
 
 #hardcoded for now
