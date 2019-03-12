@@ -31,6 +31,8 @@ def makeMenu(parent):
     btnFile.pack(side='left')
     btnFile = tk.Menubutton(menubar, text = 'Edit', underline = 0)
     btnFile.pack(side='left')
+    btnFile = tk.Menubutton(menubar, text = 'Help', underline = 0)
+    btnFile.pack(side='left')
 
 
 class ProductFrame(tk.Frame):
