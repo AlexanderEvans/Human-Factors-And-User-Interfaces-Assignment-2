@@ -17,7 +17,11 @@ from tkinter import ttk
 root = tk.Tk()
 
 #main code goes here:
-myLabel = tk.Label(root, text="Hello World")
+#myLabel = tk.Label(root, text="Hello World")
+
+self.winfo_toplevel().title("Font Shop")
+makeMenu()
+
 
 
 myLabel.pack()
