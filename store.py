@@ -11,7 +11,7 @@ import tkinter as tk
 from tkinter import ttk
 from tkinter import messagebox
 import popups
-import productframe
+import productrow
 #additional module imports
 
 #make a menubar
@@ -40,8 +40,8 @@ makeMenu(root)
 #add scrollable region
 myCanvas = tk.Canvas(root, scrollregion=(0,0,500,500), height=200, width=200)
 myScrollbar = ttk.Scrollbar(root, command=myCanvas.yview)
-myCanvas.pack(side='left')
-myScrollbar.pack(side='right', fill='y')
+myScrollbar.pack(side='right', fill = 'y')
+myCanvas.pack(fill='both', expand=1)
 myCanvas.configure(yscrollincrement='2')
 
 #handle scroll inputs
