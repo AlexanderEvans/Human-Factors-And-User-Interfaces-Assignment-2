@@ -19,12 +19,35 @@ root = tk.Tk()
 #main code goes here:
 #myLabel = tk.Label(root, text="Hello World")
 
+#change window title
 self.winfo_toplevel().title("Font Shop")
+
+#add menubar
 makeMenu()
 
+#add scrollable region
+myCanvas = tk.Canvas(self, scrollregion=(0,0,500,500), height=200, width=200)
+myScrollbar = Scrollbar(self, command=myCanvas.yview)
+myCanvas.pack(side='left')
+myScrollbar.pack(side=RIGHT, fill=Y)
+myCanvas.configure(yscrollincrement='2')
 
+#handle scroll inputs
+def rollWheel(event):
+    direction = 0
+    if event.num == 5 or event.delta == -120:
+     direction = 1
+    if event.num == 4 or event.delta == 120:
+     direction = -1
+    event.widget.yview_scroll(direction, UNITS)
 
-myLabel.pack()
+#bind button event functions to the scrollable region
+myCanvas.bind('<MouseWheel>', lambda event: rollWheel(event))
+myCanvas.bind('<Button-4>', lambda event: rollWheel(event))
+myCanvas.bind('<Button-5>', lambda event: rollWheel(event))
+
+myCanvas.focus_set()
+
 #Start the event loop
 root.mainloop();
 
