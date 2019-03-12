@@ -62,11 +62,20 @@ def makeMenu(parent):
     btnFile.pack(side='left')
 
 
+#hardcoded for now
+def makeProducts(parent):
+    myStringVarList = {'Bold','Italic','Underline'}
+    pOne = ProductFrame(self)
+    pOne.__init__(myStringVarList, parent)
+    pTwo = ProductFrame(self)
+    pTwo.__init__(myStringVarList, parent)
+    pThree = ProductFrame(self, )
+    pThree.__init__(myStringVarList, parent)
+
 class ProductFrame(tk.Frame):
-    def __init__(self, myStringVarList = [], parent = None, master = None):
+    def __init__(self, myStringVarList = [], parent = None):
         super().__init__(parent)
         self.parent=parent
-        self.master=master;
         self.pack()
         self.create_widgets()
         self.myStringVarList = myStringVarList
