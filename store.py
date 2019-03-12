@@ -114,5 +114,8 @@ def invalidInputWarning():
         rtnVal = True
     return rtnVal
 
+def displayConfirmationPopup():
+    messagebox.showinfo(title = 'Order success! ', message = 'Congratulations!  Your order has been placed successfully!')
+
 
 
