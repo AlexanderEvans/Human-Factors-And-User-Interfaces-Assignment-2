@@ -116,6 +116,8 @@ def invalidInputWarning():
 
 def displayConfirmationPopup():
     messagebox.showinfo(title = 'Order success! ', message = 'Congratulations!  Your order has been placed successfully!')
-
+    
+def invalidPaymentCredentialsError():
+    messagebox.showerror(title = 'Error! ', message = 'Error: Invalid payment credentials were detected.  Please try again.')
 
 
