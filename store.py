@@ -24,6 +24,15 @@ def makeMenu(parent):
     btnFile.pack(side='left')
     btnFile = tk.Menubutton(menubar, text = 'Help', underline = 0)
     btnFile.pack(side='left')
+    
+
+#hardcoded for now, make a row of 3 pruducts.
+def makeProducts(parent):
+    #make product rows
+    productrow(parent, {'L','C','R'})
+    productrow(parent, {'L','C','R'})
+    productrow(parent, {'L','C','R'})
+
 
 #Create "top level" window
 root = tk.Tk()
@@ -41,6 +50,11 @@ makeMenu(root)
 myCanvas = tk.Canvas(root, scrollregion=(0,0,500,500), height=200, width=200)
 myScrollbar = ttk.Scrollbar(root, command=myCanvas.yview)
 myScrollbar.pack(side='right', fill = 'y')
+
+myCanvas.
+#figure out how to add rows to a canvas
+#makeProducts(myCanvas)
+
 myCanvas.pack(fill='both', expand=1)
 myCanvas.configure(yscrollincrement='2')
 
@@ -53,7 +67,7 @@ def rollWheel(event):
      direction = -1
     event.widget.yview_scroll(direction, UNITS)
 
-#bind button event functions to the scrollable region
+#bind button event functions to the scrollable region(I don't really know exactly how this is working...)
 myCanvas.bind('<MouseWheel>', lambda event: rollWheel(event))
 myCanvas.bind('<Button-4>', lambda event: rollWheel(event))
 myCanvas.bind('<Button-5>', lambda event: rollWheel(event))
@@ -62,18 +76,4 @@ myCanvas.focus_set()
 
 #Start the event loop
 root.mainloop();
-
-
-
-#hardcoded for now
-def makeProducts(parent):
-    myStringVarList = {'Bold','Italic','Underline'}
-    pOne = ProductFrame(self)
-    pOne.__init__(myStringVarList, parent)
-    pTwo = ProductFrame(self)
-    pTwo.__init__(myStringVarList, parent)
-    pThree = ProductFrame(self, )
-    pThree.__init__(myStringVarList, parent)
-
-
 
