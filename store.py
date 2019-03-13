@@ -29,9 +29,9 @@ def makeMenu(parent):
 #hardcoded for now, make a row of 3 pruducts.
 def makeProducts(parent):
     #make product rows
-    productrow(parent, {'L','C','R'})
-    productrow(parent, {'L','C','R'})
-    productrow(parent, {'L','C','R'})
+    productrow.ProductRow(parent = parent, fontNames ={'L','C','R'})
+    productrow.ProductRow(parent = parent, fontNames ={'L','C','R'})
+    productrow.ProductRow(parent = parent, fontNames ={'L','C','R'})
 
 
 #Create "top level" window
@@ -49,14 +49,21 @@ makeMenu(root)
 #add scrollable region
 myCanvas = tk.Canvas(root, scrollregion=(0,0,500,500), height=200, width=200)
 myScrollbar = ttk.Scrollbar(root, command=myCanvas.yview)
+myCanvas.config(yscrollcommand = myScrollbar.set)
 myScrollbar.pack(side='right', fill = 'y')
 
-myCanvas.
+
 #figure out how to add rows to a canvas
 #makeProducts(myCanvas)
+makeProducts(myCanvas)
 
 myCanvas.pack(fill='both', expand=1)
 myCanvas.configure(yscrollincrement='2')
+
+
+#myImg = PhotoImage(file="myPath")
+#testLabelImage = ttk.Label(root, myImg)
+#testLabelImage.pack(side = 'left')
 
 #handle scroll inputs
 def rollWheel(event):
