@@ -96,3 +96,4 @@ def getItems():
         for productFrame in val.children:
             rtnVal += (productFrame.checkboxState + "\n")
             rtnVal += (productFrame.buttonGroup + "\n")
+    return rtnVal
