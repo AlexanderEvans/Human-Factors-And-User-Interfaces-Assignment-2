@@ -9,6 +9,6 @@ class ProductRow(tk.Frame):
         self.fontNames = fontNames
         
     def create_widgets(self):
-        self.leftProduct = productframe(self, "Left Item")
-        self.centerProduct = productframe(self, "center Item")
-        self.rightProduct = productframe(self, "right Item")
+        self.leftProduct = productframe.ProductFrame(self, "Left Item")
+        self.centerProduct = productframe.ProductFrame(self, "center Item")
+        self.rightProduct = productframe.ProductFrame(self, "right Item")

@@ -29,9 +29,13 @@ def makeMenu(parent):
 #hardcoded for now, make a row of 3 pruducts.
 def makeProducts(parent):
     #make product rows
-    productrow.ProductRow(parent = parent, fontNames ={'L','C','R'})
-    productrow.ProductRow(parent = parent, fontNames ={'L','C','R'})
-    productrow.ProductRow(parent = parent, fontNames ={'L','C','R'})
+    r1 = productrow.ProductRow(parent = parent, fontNames ={'L1','C1','R1'})
+    r2 = productrow.ProductRow(parent = parent, fontNames ={'L2','C2','R2'})
+    r3 = productrow.ProductRow(parent = parent, fontNames ={'L3','C3','R3'})
+
+    r1.grid(row = 0, column = 0, sticky = 'new', padx = 10, pady = 10)
+    r2.grid(row = 1, column = 0, sticky = 'new', padx = 10, pady = 10)
+    r3.grid(row = 2, column = 0, sticky = 'new', padx = 10, pady = 10)
 
 
 #Create "top level" window
@@ -60,6 +64,8 @@ makeProducts(myCanvas)
 myCanvas.pack(fill='both', expand=1)
 myCanvas.configure(yscrollincrement='2')
 
+myCanvas.grid_rowconfigure(2, weight=1)
+myCanvas.grid_columnconfigure(2, weight=1)
 
 #myImg = PhotoImage(file="myPath")
 #testLabelImage = ttk.Label(root, myImg)
@@ -84,3 +90,9 @@ myCanvas.focus_set()
 #Start the event loop
 root.mainloop();
 
+def getItems():
+    rtnVal = StringVar()
+    for val in myCanvas.children:
+        for productFrame in val.children:
+            rtnVal += (productFrame.checkboxState + "\n")
+            rtnVal += (productFrame.buttonGroup + "\n")
