@@ -124,17 +124,17 @@ def validateRow(row):
     total = 0
     if row.leftProduct.checkboxState.get() & (row.leftProduct.spinBox.get()==0):
         flag=True
-    elif row.leftProduct.checkboxState:
+    elif row.leftProduct.checkboxState.get():
         myStr += buildStringFromRowProduct(row.leftProduct)
         total += bumpTotal(row.leftProduct)
     if row.centerProduct.checkboxState.get() & (row.centerProduct.spinBox.get()==0):
         flag=True
-    elif row.centerProduct.checkboxState:
+    elif row.centerProduct.checkboxState.get():
         myStr += buildStringFromRowProduct(row.centerProduct)
         total += bumpTotal(row.centerProduct)
     if row.centerProduct.checkboxState.get() & (row.centerProduct.spinBox.get()==0):
         flag=True
-    elif row.centerProduct.checkboxState:
+    elif row.centerProduct.checkboxState.get():
         myStr += buildStringFromRowProduct(row.rightProduct)
         total += bumpTotal(row.rightProduct)
     reciept = myStr
@@ -159,7 +159,7 @@ def nextPage():
 
         
 
-testVar = tk.Button(myFrame, command = nextPage)
+testVar = tk.Button(myFrame, command = nextPage, text = "Go to Checkout ->")
 testVar.pack(side = 'bottom')
 scrollviewFrame.pack(side = 'top')
 #testVar.grid(row=1, column=0, sticky='wse')
