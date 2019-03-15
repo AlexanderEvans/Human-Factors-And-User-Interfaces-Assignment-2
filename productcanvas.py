@@ -13,9 +13,9 @@ def makeProducts(parent):
     #r2.grid(row = 1, column = 0, sticky = 'new', padx = 10, pady = 10)
     #r3.grid(row = 2, column = 0, sticky = 'new', padx = 10, pady = 10)
 
-    r1.pack()
-    r2.pack()
-    r3.pack()
+    r1.pack(side = 'top')
+    r2.pack(side = 'top')
+    r3.pack(side = 'top')
     array = {r1, r2, r3}
     return array
 

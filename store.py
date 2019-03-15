@@ -95,7 +95,6 @@ arrary = productcanvas.makeProducts(scrollviewFrame)
 #myCanvas.focus_set()
 
 reciept = ""
-total = 0
 
 newWindow = None
 
@@ -122,26 +121,31 @@ def validateRow(row):
     flag = False
     myStr = ""
     total = 0
-    if row.leftProduct.checkboxState.get() & (row.leftProduct.spinBox.get()==0):
+    print("Left: "+ repr(row.leftProduct.checkboxState.get()) + " : " + repr(int(float(row.leftProduct.spinBox.get()))==0))
+    print("Center: "+ repr(row.centerProduct.checkboxState.get()) + " : " + repr(int(float(row.centerProduct.spinBox.get()))==0))
+    print("Right: "+ repr(row.rightProduct.checkboxState.get()) + " : " + repr(int(float(row.rightProduct.spinBox.get()))==0))
+    if row.leftProduct.checkboxState.get() and (int(float(row.leftProduct.spinBox.get()))==0):
         flag=True
+        print('h1')
     elif row.leftProduct.checkboxState.get():
         myStr += buildStringFromRowProduct(row.leftProduct)
         total += bumpTotal(row.leftProduct)
-    if row.centerProduct.checkboxState.get() & (row.centerProduct.spinBox.get()==0):
+    if row.centerProduct.checkboxState.get() and (int(float(row.centerProduct.spinBox.get()))==0):
         flag=True
+        print('h2')
     elif row.centerProduct.checkboxState.get():
         myStr += buildStringFromRowProduct(row.centerProduct)
         total += bumpTotal(row.centerProduct)
-    if row.centerProduct.checkboxState.get() & (row.centerProduct.spinBox.get()==0):
+    if row.rightProduct.checkboxState.get() and (int(float(row.rightProduct.spinBox.get()))==0):
         flag=True
-    elif row.centerProduct.checkboxState.get():
+        print('h3')
+    elif row.rightProduct.checkboxState.get():
         myStr += buildStringFromRowProduct(row.rightProduct)
         total += bumpTotal(row.rightProduct)
     reciept = myStr
     return flag, total
 
 def nextPage():
-    reciept = ""
     total = 0
     error = False
     for row in arrary:
@@ -155,7 +159,7 @@ def nextPage():
         ignoreError = popups.invalidInputWarning()
 
     if ignoreError:
-        newWindow = payment.Payment(reciept, total)
+        newWindow = payment.Payment(None, reciept, total)
 
         
 

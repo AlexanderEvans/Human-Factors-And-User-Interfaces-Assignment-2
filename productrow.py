@@ -9,7 +9,7 @@ class ProductRow(tk.Frame):
         self.leftProduct = productframe.ProductFrame(self, fn1, fp1)
         self.centerProduct = productframe.ProductFrame(self, fn2, fp2)
         self.rightProduct = productframe.ProductFrame(self, fn3, fp3)
-        self.leftProduct.pack(side = 'left', expand = 1)
-        self.centerProduct.pack(side = 'left', expand = 1)
-        self.rightProduct.pack(side = 'left', expand = 1)
+        self.leftProduct.grid(row = 0, column = 0)
+        self.centerProduct.grid(row = 0, column = 1)
+        self.rightProduct.grid(row = 0, column = 2)
         
