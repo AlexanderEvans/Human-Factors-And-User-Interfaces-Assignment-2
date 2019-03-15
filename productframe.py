@@ -6,7 +6,6 @@ class ProductFrame(tk.Frame):
     def __init__(self, parent = None, text = "Default Text: ", price = 1.99, height = 100, width = 100):
         super().__init__(parent)
         self.parent=parent
-        self.pack()
         self.text = text
         self.price = price
         self.create_widgets()
@@ -26,7 +25,6 @@ class ProductFrame(tk.Frame):
         
         #line 3
         self.productImage = imageframe.ImageFrame(self)
-        self.productImage.photo
         self.productImage.grid(row=2,column=0, columnspan = 3)
 
         self.checkbox.grid(row=0,column=0)

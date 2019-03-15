@@ -14,3 +14,9 @@ def displayConfirmationPopup():
 def invalidPaymentCredentialsError():
     messagebox.showerror(title = 'Error! ', message = 'Error: Invalid payment credentials were detected.  Please try again.')
 
+def donothing():
+     messagebox.showinfo(title = 'About', message = 'not implemented yet')
+     
+def aboutPage():
+    messagebox.showinfo(title = 'About', message = 'This is the Font Shop!  Welcome to the Font Shop!  Please enjoy, the Font Shop!')
+

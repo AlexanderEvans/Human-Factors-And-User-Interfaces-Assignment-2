@@ -31,6 +31,9 @@
     </Compile>
     <Compile Include="productframe.py" />
     <Compile Include="productrow.py" />
+    <Compile Include="scrollview.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="store.py" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />

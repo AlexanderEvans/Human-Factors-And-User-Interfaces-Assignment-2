@@ -9,18 +9,21 @@ def makeProducts(parent):
     r2 = productrow.ProductRow(parent = parent, fn1 = 'L2: ', fn2 = 'C2: ', fn3 = 'R2: ', fp1 = 4.49, fp2 =  5.49, fp3 =  6.49)
     r3 = productrow.ProductRow(parent = parent, fn1 = 'L3: ', fn2 = 'C3: ', fn3 = 'R3: ', fp1 = 7.49, fp2 =  8.49, fp3 =  9.49)
 
-    r1.grid(row = 0, column = 0, sticky = 'new', padx = 10, pady = 10)
-    r2.grid(row = 1, column = 0, sticky = 'new', padx = 10, pady = 10)
-    r3.grid(row = 2, column = 0, sticky = 'new', padx = 10, pady = 10)
+    #r1.grid(row = 0, column = 0, sticky = 'new', padx = 10, pady = 10)
+    #r2.grid(row = 1, column = 0, sticky = 'new', padx = 10, pady = 10)
+    #r3.grid(row = 2, column = 0, sticky = 'new', padx = 10, pady = 10)
 
-    #r1.pack()
-    #r2.pack()
-    #r3.pack()
+    r1.pack()
+    r2.pack()
+    r3.pack()
+    array = {r1, r2, r3}
+    return array
 
 class ProductCanvas(tk.Canvas):
     def __init__(self, parent = None, *args, **kwargs):
         super().__init__(parent, *args, **kwargs)
-        self.frame = tk.Frame();
-        self.create_window((0,0),window=self.frame,anchor='nw')
+        self.frame = tk.Frame(self);
+        self.window = self.create_window((0,0),window=self.frame,anchor='nw')
+        self.frame.pack(expand = 1)
         makeProducts(self.frame)
         

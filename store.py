@@ -14,14 +14,9 @@ import popups
 import productframe
 import productrow
 import productcanvas
+import scrollview
 
 #additional module imports
-
-def donothing():
-     messagebox.showinfo(title = 'About', message = 'not implemented yet')
-     
-def aboutPage():
-    messagebox.showinfo(title = 'About', message = 'This is the Font Shop!  Welcome to the Font Shop!  Please enjoy, the Font Shop!')
 
 #make a menubar
 def makeMenu(master):
@@ -30,10 +25,10 @@ def makeMenu(master):
     filemenu.add_command(label="Exit", command=master.quit)
 
     editmenu = tk.Menu(menubar, tearoff=0)
-    editmenu.add_command(label="Clear", command=donothing)
+    editmenu.add_command(label="Clear", command=popups.donothing)
     
     helpmenu = tk.Menu(menubar, tearoff=0)
-    helpmenu.add_command(label="About...", command=aboutPage)
+    helpmenu.add_command(label="About...", command=popups.aboutPage)
     
     menubar.add_cascade(label="File", menu=filemenu)
     menubar.add_cascade(label="Edit", menu=editmenu)
@@ -42,59 +37,70 @@ def makeMenu(master):
     
 
 
-
+array = []
 
 #Create "top level" window
 root = tk.Tk()
 
 #change window title
 root.title("Font Shop")
-
 #main code goes here:
 
 #add menubar
 root.config(menu=makeMenu(root))
 
+myFrame = tk.Frame(root)
 
-#add scrollable region
-myCanvas = productcanvas.ProductCanvas(root, scrollregion=(0,0,500,5500), height=200, width=200)
-myScrollbar = ttk.Scrollbar(root, command=myCanvas.yview)
-myCanvas.config(yscrollcommand = myScrollbar.set)
-myScrollbar.pack(side='right', fill = 'y')
+scrollviewFrame = scrollview.VerticalScrolledFrame(myFrame)
+arrary = productcanvas.makeProducts(scrollviewFrame)
+#scrollviewFrame.grid(row = 0, column=0,  sticky='new')
 
-
-#figure out how to add rows to a canvas
-#makeProducts(myCanvas)
-myCanvas.pack(fill='both', expand=1)
-myCanvas.configure(yscrollincrement='2')
-
-myCanvas.grid_rowconfigure(2, weight=1)
-myCanvas.grid_columnconfigure(2, weight=1)
-
-
+##add scrollable region
+#myCanvas = productcanvas.ProductCanvas(root, scrollregion=(0,0,100,10000), height=400, width=200)
+#myScrollbar = ttk.Scrollbar(root, command=myCanvas.yview)
+#myCanvas.config(yscrollcommand = myScrollbar.set)
+#myCanvas.grid(row = 0, column = 0, sticky = 'nes')
+#myScrollbar.grid(row = 0, column = 1, sticky = 'nes')
+#
+#
+#
+##figure out how to add rows to a canvas
+##makeProducts(myCanvas)
+#myCanvas.configure(yscrollincrement='2')
+#
+#myCanvas.grid_rowconfigure(2, weight=1)
+#myCanvas.grid_columnconfigure(2, weight=1)
+#
 
 #myImg = PhotoImage(file="myPath")
 #testLabelImage = ttk.Label(root, myImg)
 #testLabelImage.pack(side = 'left')
 
-#handle scroll inputs
-def rollWheel(event):
-    direction = 0
-    if event.num == 5 or event.delta == -120:
-     direction = 1
-    if event.num == 4 or event.delta == 120:
-     direction = -1
-    event.widget.yview_scroll(direction, UNITS)
+##handle scroll inputs
+#def rollWheel(event):
+#    direction = 0
+#    if event.num == 5 or event.delta == -120:
+#     direction = 1
+#    if event.num == 4 or event.delta == 120:
+#     direction = -1
+#    event.widget.yview_scroll(direction, UNITS)
+#
+##bind button event functions to the scrollable region(I don't really know exactly how this is working...)
+#myCanvas.bind('<MouseWheel>', lambda event: rollWheel(event))
+#myCanvas.bind('<Button-4>', lambda event: rollWheel(event))
+#myCanvas.bind('<Button-5>', lambda event: rollWheel(event))
+#
+#myCanvas.focus_set()
 
-#bind button event functions to the scrollable region(I don't really know exactly how this is working...)
-myCanvas.bind('<MouseWheel>', lambda event: rollWheel(event))
-myCanvas.bind('<Button-4>', lambda event: rollWheel(event))
-myCanvas.bind('<Button-5>', lambda event: rollWheel(event))
+def nextPage():
+    nextPage
 
-myCanvas.focus_set()
+testVar = tk.Button(myFrame, command = nextPage)
+testVar.pack(side = 'bottom')
+scrollviewFrame.pack(side = 'top')
+#testVar.grid(row=1, column=0, sticky='wse')
 
-testVar = productframe.ProductFrame(root, "emerge test", 9.99)
-testVar.pack();
+myFrame.pack(fill = 'both', expand = 1)
 
 #Start the event loop
 root.mainloop();
