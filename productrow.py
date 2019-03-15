@@ -3,16 +3,13 @@ from tkinter import ttk
 import productframe
 
 class ProductRow(tk.Frame):
-    def __init__(self, parent = None, fontNames = {"Default 1", "Default 2", "Default 3"}, fontPrices = {1.99,2.99,3.99}):
+    def __init__(self, parent = None, fn1 = "Default 1", fn2 = "Default 2", fn3 =  "Default 3", fp1 = 1.99, fp2 = 2.99, fp3 = 3.99):
         super().__init__(parent)
         self.parent=parent
-        self.fontNames = fontNames
-        self.fontPrices = fontPrices
+        self.leftProduct = productframe.ProductFrame(self, fn1, fp1)
+        self.centerProduct = productframe.ProductFrame(self, fn2, fp2)
+        self.rightProduct = productframe.ProductFrame(self, fn3, fp3)
+        self.leftProduct.pack(side = 'left', expand = 1)
+        self.centerProduct.pack(side = 'left', expand = 1)
+        self.rightProduct.pack(side = 'left', expand = 1)
         
-    def create_widgets(self):
-        self.leftProduct = productframe.ProductFrame(self, self.fontNames[1], self.fontPrices[1])
-        self.centerProduct = productframe.ProductFrame(self, self.fontNames[2], self.fontPrices[2])
-        self.rightProduct = productframe.ProductFrame(self, self.fontNames[3], self.fontPrices[3])
-        self.leftProduct.pack(side = 'left')
-        self.centerProduct.pack(side = 'left')
-        self.rightProduct.pack(side = 'left')

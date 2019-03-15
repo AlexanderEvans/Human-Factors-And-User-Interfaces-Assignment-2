@@ -11,7 +11,10 @@ import tkinter as tk
 from tkinter import ttk
 from tkinter import messagebox
 import popups
+import productframe
 import productrow
+import productcanvas
+
 #additional module imports
 
 def donothing():
@@ -38,20 +41,7 @@ def makeMenu(master):
     return menubar
     
 
-#hardcoded for now, make a row of 3 pruducts.
-def makeProducts(parent):
-    #make product rows
-    r1 = productrow.ProductRow(parent = parent, fontNames ={'L1: ','C1: ','R1: '}, fontPrices = {1.49, 2.49, 3.49})
-    r2 = productrow.ProductRow(parent = parent, fontNames ={'L2: ','C2: ','R2: '}, fontPrices = {4.49, 5.49, 6.49})
-    r3 = productrow.ProductRow(parent = parent, fontNames ={'L3: ','C3: ','R3: '}, fontPrices = {7.49, 8.49, 9.49})
 
-    #r1.grid(row = 0, column = 0, sticky = 'new', padx = 10, pady = 10)
-    #r2.grid(row = 1, column = 0, sticky = 'new', padx = 10, pady = 10)
-    #r3.grid(row = 2, column = 0, sticky = 'new', padx = 10, pady = 10)
-
-    r1.pack()
-    r2.pack()
-    r3.pack()
 
 
 #Create "top level" window
@@ -61,15 +51,13 @@ root = tk.Tk()
 root.title("Font Shop")
 
 #main code goes here:
-myFrame = tk.Frame(root)
-myFrame.pack(side = 'top', fill = 'x')
 
 #add menubar
 root.config(menu=makeMenu(root))
 
 
 #add scrollable region
-myCanvas = tk.Canvas(root, scrollregion=(0,0,500,500), height=200, width=200)
+myCanvas = productcanvas.ProductCanvas(root, scrollregion=(0,0,500,5500), height=200, width=200)
 myScrollbar = ttk.Scrollbar(root, command=myCanvas.yview)
 myCanvas.config(yscrollcommand = myScrollbar.set)
 myScrollbar.pack(side='right', fill = 'y')
@@ -77,13 +65,13 @@ myScrollbar.pack(side='right', fill = 'y')
 
 #figure out how to add rows to a canvas
 #makeProducts(myCanvas)
-makeProducts(myCanvas)
-
 myCanvas.pack(fill='both', expand=1)
 myCanvas.configure(yscrollincrement='2')
 
 myCanvas.grid_rowconfigure(2, weight=1)
 myCanvas.grid_columnconfigure(2, weight=1)
+
+
 
 #myImg = PhotoImage(file="myPath")
 #testLabelImage = ttk.Label(root, myImg)
@@ -105,13 +93,16 @@ myCanvas.bind('<Button-5>', lambda event: rollWheel(event))
 
 myCanvas.focus_set()
 
+testVar = productframe.ProductFrame(root, "emerge test", 9.99)
+testVar.pack();
+
 #Start the event loop
 root.mainloop();
 
-def getItems():
-    rtnVal = StringVar()
-    for val in myCanvas.children:
-        for productFrame in val.children:
-            rtnVal += (productFrame.checkboxState + "\n")
-            rtnVal += (productFrame.buttonGroup + "\n")
-    return rtnVal
+#def getItems():
+#    rtnVal = StringVar()
+#    for val in myCanvas.children:
+#        for productFrame in val.children:
+#            rtnVal += (productFrame.checkboxState + "\n")
+#            rtnVal += (productFrame.buttonGroup + "\n")
+#    return rtnVal

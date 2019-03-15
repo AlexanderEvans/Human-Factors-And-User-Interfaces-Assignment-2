@@ -22,7 +22,13 @@
     <Compile Include="driver.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="imageframe.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="popups.py" />
+    <Compile Include="productcanvas.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="productframe.py" />
     <Compile Include="productrow.py" />
     <Compile Include="store.py" />
