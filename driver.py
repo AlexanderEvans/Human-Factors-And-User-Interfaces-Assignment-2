@@ -3,4 +3,6 @@ from tkinter import ttk
 from tkinter import messagebox
 import popups
 import productrow
+import store
 
+myStore = store.Store()

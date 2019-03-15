@@ -14,95 +14,86 @@ import popups
 import productrow
 #additional module imports
 
-#make a menubar
-def makeMenu(master):
-    filemenu = tk.Menu(menubar, tearoff=0)
-    filemenu.add_command(label="Exit", command=master.quit)
-
-    editmenu = Menu(menubar, tearoff=0)
-    editmenu.add_command(label="Clear", command=donothing)
-    
-    helpmenu = Menu(menubar, tearoff=0)
-    helpmenu.add_command(label="About...", command=donothing)
-    
-    menubar = tk.Menu(master = master)
-    menubar.add_cascade(label="File", menu=filemenu)
-    menubar.add_cascade(label="Edit", menu=editmenu)
-    menubar.add_cascade(label="Help", menu=helpmenu)
-    
-
-#hardcoded for now, make a row of 3 pruducts.
-def makeProducts(parent):
-    #make product rows
-    r1 = productrow.ProductRow(parent = parent, fontNames ={'L1: ','C1: ','R1: '}, fontPrices = {1.49, 2.49, 3.49})
-    r2 = productrow.ProductRow(parent = parent, fontNames ={'L2: ','C2: ','R2: '}, fontPrices = {4.49, 5.49, 6.49})
-    r3 = productrow.ProductRow(parent = parent, fontNames ={'L3: ','C3: ','R3: '}, fontPrices = {7.49, 8.49, 9.49})
-
-    r1.grid(row = 0, column = 0, sticky = 'new', padx = 10, pady = 10)
-    r2.grid(row = 1, column = 0, sticky = 'new', padx = 10, pady = 10)
-    r3.grid(row = 2, column = 0, sticky = 'new', padx = 10, pady = 10)
-
-    r1.pack()
-    r2.pack()
-    r3.pack()
-
-
 #Create "top level" window
-root = tk.Tk()
+class Store(tk.Tk):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.title("Font Shop")
+        #Define UI
 
-#main code goes here:
-#myLabel = tk.Label(root, text="Hello World")
+        #add menubar
+        makeMenu(self)
 
-#change window title
-root.title("Font Shop")
+        #add scrollable region(note, might want to absract this away into derived canvas class)
+        self.myCanvas = tk.Canvas(root, scrollregion=(0,0,500,500), height=200, width=200)
+        self.myScrollbar = ttk.Scrollbar(root, command=myCanvas.yview)
+        self.myCanvas.config(yscrollcommand = myScrollbar.set)
+        self.myScrollbar.pack(side='right', fill = 'y')
 
-#add menubar
-makeMenu(root)
+        #figure out how to add rows to a canvas
+        #makeProducts(myCanvas)
+        makeProducts(myCanvas)
 
-#add scrollable region
-myCanvas = tk.Canvas(root, scrollregion=(0,0,500,500), height=200, width=200)
-myScrollbar = ttk.Scrollbar(root, command=myCanvas.yview)
-myCanvas.config(yscrollcommand = myScrollbar.set)
-myScrollbar.pack(side='right', fill = 'y')
+        self.myCanvas.pack(fill='both', expand=1)
+        self.myCanvas.configure(yscrollincrement='2')
 
+        self.myCanvas.grid_rowconfigure(2, weight=1)
+        self.myCanvas.grid_columnconfigure(2, weight=1)
+    
+        #bind button event functions to the scrollable region(I don't really know exactly how this is working...)
+        self.myCanvas.bind('<MouseWheel>', lambda event: rollWheel(event))
+        self.myCanvas.bind('<Button-4>', lambda event: rollWheel(event))
+        self.myCanvas.bind('<Button-5>', lambda event: rollWheel(event))
 
-#figure out how to add rows to a canvas
-#makeProducts(myCanvas)
-makeProducts(myCanvas)
+        self.myCanvas.focus_set()
+    #make a menubar
+    def makeMenu(master):
+        filemenu = tk.Menu(menubar, tearoff=0)
+        filemenu.add_command(label="Exit", command=master.quit)
 
-myCanvas.pack(fill='both', expand=1)
-myCanvas.configure(yscrollincrement='2')
+        editmenu = Menu(menubar, tearoff=0)
+        editmenu.add_command(label="Clear", command=donothing)
+    
+        helpmenu = Menu(menubar, tearoff=0)
+        helpmenu.add_command(label="About...", command=aboutPage)
+    
+        menubar = tk.Menu(master = master)
+        menubar.add_cascade(label="File", menu=filemenu)
+        menubar.add_cascade(label="Edit", menu=editmenu)
+        menubar.add_cascade(label="Help", menu=helpmenu)
+    
+    #hardcoded for now, make a row of 3 pruducts.
+    def makeProducts(parent):
+        #make product rows
+        r1 = productrow.ProductRow(parent = parent, fontNames ={'L1: ','C1: ','R1: '}, fontPrices = {1.49, 2.49, 3.49})
+        r2 = productrow.ProductRow(parent = parent, fontNames ={'L2: ','C2: ','R2: '}, fontPrices = {4.49, 5.49, 6.49})
+        r3 = productrow.ProductRow(parent = parent, fontNames ={'L3: ','C3: ','R3: '}, fontPrices = {7.49, 8.49, 9.49})
 
-myCanvas.grid_rowconfigure(2, weight=1)
-myCanvas.grid_columnconfigure(2, weight=1)
+        r1.grid(row = 0, column = 0, sticky = 'new', padx = 10, pady = 10)
+        r2.grid(row = 1, column = 0, sticky = 'new', padx = 10, pady = 10)
+        r3.grid(row = 2, column = 0, sticky = 'new', padx = 10, pady = 10)
 
-#myImg = PhotoImage(file="myPath")
-#testLabelImage = ttk.Label(root, myImg)
-#testLabelImage.pack(side = 'left')
+        r1.pack()
+        r2.pack()
+        r3.pack()
+    #handle scroll inputs
+    def rollWheel(event):
+        direction = 0
+        if event.num == 5 or event.delta == -120:
+            direction = 1
+        if event.num == 4 or event.delta == 120:
+            direction = -1
+        event.widget.yview_scroll(direction, UNITS)
 
-#handle scroll inputs
-def rollWheel(event):
-    direction = 0
-    if event.num == 5 or event.delta == -120:
-     direction = 1
-    if event.num == 4 or event.delta == 120:
-     direction = -1
-    event.widget.yview_scroll(direction, UNITS)
+if __name__=="__main__":
+    app=Store()
+    app.mainloop()
 
-#bind button event functions to the scrollable region(I don't really know exactly how this is working...)
-myCanvas.bind('<MouseWheel>', lambda event: rollWheel(event))
-myCanvas.bind('<Button-4>', lambda event: rollWheel(event))
-myCanvas.bind('<Button-5>', lambda event: rollWheel(event))
-
-myCanvas.focus_set()
-
-#Start the event loop
-root.mainloop();
-
-def getItems():
-    rtnVal = StringVar()
-    for val in myCanvas.children:
-        for productFrame in val.children:
-            rtnVal += (productFrame.checkboxState + "\n")
-            rtnVal += (productFrame.buttonGroup + "\n")
-    return rtnVal
+#
+#def getItems():
+#    rtnVal = StringVar()
+#    for val in myCanvas.children:
+#        for productFrame in val.children:
+#            rtnVal += (productFrame.checkboxState + "\n")
+#            rtnVal += (productFrame.buttonGroup + "\n")
+#    return rtnVal
