@@ -2,18 +2,19 @@ import tkinter as tk
 from tkinter import ttk
 
 class ProductFrame(tk.Frame):
-    def __init__(self, parent = None, text = "Default Text"):
+    def __init__(self, parent = None, text = "Default Text: ", price = 1.99):
         super().__init__(parent)
         self.parent=parent
         self.pack()
         self.create_widgets()
         self.text = text;
+        self.price
 
     def create_widgets(self):
         #line one of frame:
         self.checkboxState = tk.BooleanVar()
         self.checkbox = ttk.Checkbutton(self, variable = self.checkboxState)
-        self.itemNameAndPrice = ttk.Label(self, text=self.text)
+        self.itemNameAndPrice = ttk.Label(self, text = (self.text + price))
         self.spinBox = ttk.Spinbox(self)
 
         #line 2

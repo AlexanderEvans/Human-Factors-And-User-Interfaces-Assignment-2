@@ -12,3 +12,6 @@ class ProductRow(tk.Frame):
         self.leftProduct = productframe.ProductFrame(self, "Left Item")
         self.centerProduct = productframe.ProductFrame(self, "center Item")
         self.rightProduct = productframe.ProductFrame(self, "right Item")
+        self.leftProduct.pack(side = 'left')
+        self.centerProduct.pack(side = 'left')
+        self.rightProduct.pack(side = 'left')
