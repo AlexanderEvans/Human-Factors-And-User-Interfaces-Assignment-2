@@ -126,19 +126,16 @@ def validateRow(row):
     print("Right: "+ repr(row.rightProduct.checkboxState.get()) + " : " + repr(int(float(row.rightProduct.spinBox.get()))==0))
     if row.leftProduct.checkboxState.get() and (int(float(row.leftProduct.spinBox.get()))==0):
         flag=True
-        print('h1')
     elif row.leftProduct.checkboxState.get():
         myStr += buildStringFromRowProduct(row.leftProduct)
         total += bumpTotal(row.leftProduct)
     if row.centerProduct.checkboxState.get() and (int(float(row.centerProduct.spinBox.get()))==0):
         flag=True
-        print('h2')
     elif row.centerProduct.checkboxState.get():
         myStr += buildStringFromRowProduct(row.centerProduct)
         total += bumpTotal(row.centerProduct)
     if row.rightProduct.checkboxState.get() and (int(float(row.rightProduct.spinBox.get()))==0):
         flag=True
-        print('h3')
     elif row.rightProduct.checkboxState.get():
         myStr += buildStringFromRowProduct(row.rightProduct)
         total += bumpTotal(row.rightProduct)
