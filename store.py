@@ -15,15 +15,20 @@ import productrow
 #additional module imports
 
 #make a menubar
-def makeMenu(parent):
-    menubar = tk.Frame(parent)
-    menubar.pack(side = 'top', fill = 'x')
-    btnFile = tk.Menubutton(menubar, text = 'File', underline = 0)
-    btnFile.pack(side='left')
-    btnFile = tk.Menubutton(menubar, text = 'Edit', underline = 0)
-    btnFile.pack(side='left')
-    btnFile = tk.Menubutton(menubar, text = 'Help', underline = 0)
-    btnFile.pack(side='left')
+def makeMenu(master):
+    filemenu = tk.Menu(menubar, tearoff=0)
+    filemenu.add_command(label="Exit", command=master.quit)
+
+    editmenu = Menu(menubar, tearoff=0)
+    editmenu.add_command(label="Clear", command=donothing)
+    
+    helpmenu = Menu(menubar, tearoff=0)
+    helpmenu.add_command(label="About...", command=donothing)
+    
+    menubar = tk.Menu(master = master)
+    menubar.add_cascade(label="File", menu=filemenu)
+    menubar.add_cascade(label="Edit", menu=editmenu)
+    menubar.add_cascade(label="Help", menu=helpmenu)
     
 
 #hardcoded for now, make a row of 3 pruducts.
