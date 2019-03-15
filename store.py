@@ -11,10 +11,12 @@ import tkinter as tk
 from tkinter import ttk
 from tkinter import messagebox
 import popups
+import imageframe
 import productframe
 import productrow
 import productcanvas
 import scrollview
+import payment
 
 #additional module imports
 
@@ -92,8 +94,70 @@ arrary = productcanvas.makeProducts(scrollviewFrame)
 #
 #myCanvas.focus_set()
 
+reciept = ""
+total = 0
+
+newWindow = None
+
+
+        
+def bumpTotal(product):
+    return (float(product.spinBox.get()) * product.price)
+
+def buildStringFromRowProduct(product):
+    myStr = ""
+    varient = ""
+    if product.buttonGroup==0:
+        varient=" - Bold"
+    elif  product.buttonGroup==1:
+        varient=" - Italic"
+    elif  product.buttonGroup==2:
+        varient=" - Underlined"
+    
+    myStr += ( repr(product.spinBox.get()) + product.itemNameAndPriceString + varient)
+    myStr += '\n'
+    return myStr
+
+def validateRow(row):
+    flag = False
+    myStr = ""
+    total = 0
+    if row.leftProduct.checkboxState.get() & (row.leftProduct.spinBox.get()==0):
+        flag=True
+    elif row.leftProduct.checkboxState:
+        myStr += buildStringFromRowProduct(row.leftProduct)
+        total += bumpTotal(row.leftProduct)
+    if row.centerProduct.checkboxState.get() & (row.centerProduct.spinBox.get()==0):
+        flag=True
+    elif row.centerProduct.checkboxState:
+        myStr += buildStringFromRowProduct(row.centerProduct)
+        total += bumpTotal(row.centerProduct)
+    if row.centerProduct.checkboxState.get() & (row.centerProduct.spinBox.get()==0):
+        flag=True
+    elif row.centerProduct.checkboxState:
+        myStr += buildStringFromRowProduct(row.rightProduct)
+        total += bumpTotal(row.rightProduct)
+    reciept = myStr
+    return flag, total
+
 def nextPage():
-    nextPage
+    reciept = ""
+    total = 0
+    error = False
+    for row in arrary:
+        catch = False
+        catch, total = validateRow(row)
+        if catch:
+            error=True
+
+    ignoreError = True
+    if error:
+        ignoreError = popups.invalidInputWarning()
+
+    if ignoreError:
+        newWindow = payment.Payment(reciept, total)
+
+        
 
 testVar = tk.Button(myFrame, command = nextPage)
 testVar.pack(side = 'bottom')

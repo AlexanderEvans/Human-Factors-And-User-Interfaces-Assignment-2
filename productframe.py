@@ -14,8 +14,9 @@ class ProductFrame(tk.Frame):
         #line one of frame:
         self.checkboxState = tk.BooleanVar()
         self.checkbox = ttk.Checkbutton(self, variable = self.checkboxState)
-        self.itemNameAndPrice = ttk.Label(self, text = (self.text + repr(self.price)))
-        self.spinBox = ttk.Spinbox(self)
+        self.itemNameAndPriceString = (self.text + repr(self.price))
+        self.itemNameAndPrice = ttk.Label(self, text = self.itemNameAndPriceString)
+        self.spinBox = ttk.Spinbox(self, from_ = 0, to = 9999)
 
         #line 2
         self.buttonGroup = tk.IntVar()

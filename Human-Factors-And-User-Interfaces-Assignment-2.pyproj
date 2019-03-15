@@ -25,6 +25,9 @@
     <Compile Include="imageframe.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="payment.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="popups.py" />
     <Compile Include="productcanvas.py">
       <SubType>Code</SubType>
