@@ -16,6 +16,9 @@ import productrow
 
 def donothing():
      messagebox.showinfo(title = 'About', message = 'not implemented yet')
+     
+def aboutPage():
+    messagebox.showinfo(title = 'About', message = 'This is the Font Shop!  Welcome to the Font Shop!  Please enjoy, the Font Shop!')
 
 #make a menubar
 def makeMenu(master):
@@ -27,7 +30,7 @@ def makeMenu(master):
     editmenu.add_command(label="Clear", command=donothing)
     
     helpmenu = tk.Menu(menubar, tearoff=0)
-    helpmenu.add_command(label="About...", command=donothing)
+    helpmenu.add_command(label="About...", command=aboutPage)
     
     menubar.add_cascade(label="File", menu=filemenu)
     menubar.add_cascade(label="Edit", menu=editmenu)
@@ -54,14 +57,16 @@ def makeProducts(parent):
 #Create "top level" window
 root = tk.Tk()
 
-#main code goes here:
-#myLabel = tk.Label(root, text="Hello World")
-
 #change window title
 root.title("Font Shop")
 
+#main code goes here:
+myFrame = tk.Frame(root)
+myFrame.pack(side = 'top', fill = 'x')
+
 #add menubar
-menubar = makeMenu(root)
+root.config(menu=makeMenu(root))
+
 
 #add scrollable region
 myCanvas = tk.Canvas(root, scrollregion=(0,0,500,500), height=200, width=200)
