@@ -19,6 +19,9 @@
     <VisualStudioVersion Condition=" '$(VisualStudioVersion)' == '' ">10.0</VisualStudioVersion>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="credentialframe.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="driver.py">
       <SubType>Code</SubType>
     </Compile>
@@ -34,10 +37,16 @@
     </Compile>
     <Compile Include="productframe.py" />
     <Compile Include="productrow.py" />
+    <Compile Include="recieptframe.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="scrollview.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="store.py" />
+    <Compile Include="totalframe.py">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
 </Project>
