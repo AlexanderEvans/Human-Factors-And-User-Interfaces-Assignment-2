@@ -5,7 +5,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{62f518f9-07e1-4db0-8c49-89d7399611ce}</ProjectGuid>
     <ProjectHome />
-    <StartupFile>driver.py</StartupFile>
+    <StartupFile>store.py</StartupFile>
     <SearchPath />
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>

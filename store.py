@@ -14,21 +14,25 @@ import popups
 import productrow
 #additional module imports
 
+def donothing():
+     messagebox.showinfo(title = 'About', message = 'not implemented yet')
+
 #make a menubar
 def makeMenu(master):
+    menubar = tk.Menu(master = master)
     filemenu = tk.Menu(menubar, tearoff=0)
     filemenu.add_command(label="Exit", command=master.quit)
 
-    editmenu = Menu(menubar, tearoff=0)
+    editmenu = tk.Menu(menubar, tearoff=0)
     editmenu.add_command(label="Clear", command=donothing)
     
-    helpmenu = Menu(menubar, tearoff=0)
+    helpmenu = tk.Menu(menubar, tearoff=0)
     helpmenu.add_command(label="About...", command=donothing)
     
-    menubar = tk.Menu(master = master)
     menubar.add_cascade(label="File", menu=filemenu)
     menubar.add_cascade(label="Edit", menu=editmenu)
     menubar.add_cascade(label="Help", menu=helpmenu)
+    return menubar
     
 
 #hardcoded for now, make a row of 3 pruducts.
@@ -38,9 +42,9 @@ def makeProducts(parent):
     r2 = productrow.ProductRow(parent = parent, fontNames ={'L2: ','C2: ','R2: '}, fontPrices = {4.49, 5.49, 6.49})
     r3 = productrow.ProductRow(parent = parent, fontNames ={'L3: ','C3: ','R3: '}, fontPrices = {7.49, 8.49, 9.49})
 
-    r1.grid(row = 0, column = 0, sticky = 'new', padx = 10, pady = 10)
-    r2.grid(row = 1, column = 0, sticky = 'new', padx = 10, pady = 10)
-    r3.grid(row = 2, column = 0, sticky = 'new', padx = 10, pady = 10)
+    #r1.grid(row = 0, column = 0, sticky = 'new', padx = 10, pady = 10)
+    #r2.grid(row = 1, column = 0, sticky = 'new', padx = 10, pady = 10)
+    #r3.grid(row = 2, column = 0, sticky = 'new', padx = 10, pady = 10)
 
     r1.pack()
     r2.pack()
@@ -57,7 +61,7 @@ root = tk.Tk()
 root.title("Font Shop")
 
 #add menubar
-makeMenu(root)
+menubar = makeMenu(root)
 
 #add scrollable region
 myCanvas = tk.Canvas(root, scrollregion=(0,0,500,500), height=200, width=200)
