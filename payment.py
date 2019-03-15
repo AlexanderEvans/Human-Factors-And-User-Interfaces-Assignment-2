@@ -1,15 +1,8 @@
 import tkinter as tk
 from tkinter import ttk
 import credentialframe
+import recieptframe
 
-class RecieptFrame(tk.Frame):
-    def __init__(self, parent = None, reciept = "", *args, **kwargs):
-        super().__init__(parent, *args, **kwargs)
-        self.items = tk.Label(self, text = "Items:")
-        self.litems = tk.Label(self, text = reciept)
-        
-        self.items.grid(row = 0, column = 0)
-        self.litems.grid(row = 1, column = 0)
 
 class TotalFrame(tk.Frame):
     def __init__(self, parent = None, total = 0, *args, **kwargs):
@@ -41,7 +34,7 @@ class Payment(tk.Toplevel):
         super().__init__(parent, *args, **kwargs)
         self.credentialFrame = credentialframe.CredentialFrame(self)
         self.credentialFrame.grid(row = 0, column = 0, columnspan = 2)
-        self.items = RecieptFrame(self, reciept)
+        self.items = recieptframe.RecieptFrame(self, reciept)
         self.totals = TotalFrame(self, total)
         self.items.grid(row = 1, column = 0)
         self.totals.grid(row = 1, column = 2)
